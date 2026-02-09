@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    background: beige;
+}
+nav{
+    width: 100%;
+    height: 10vh;
+    background-color: brown;
+    margin: auto;
+}
+ul{
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: space-evenly;
+    list-style: none;
+    padding: 2vh;
+}    
+li{
+    font-size: 4vh;
+    color: wheat;
+}
+#team{
+    width: 40%;
+    bottom: 0;
+    right: 10%;
+    transition: all .1s ease-in-out;
+}
+#tetsu{
+    width: 20%;
+    bottom: 0;
+    left: 20%;
+    transition: all .1s ease-in-out;
+}
+
+/**/
+
+header{
+    height: 90vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+header img{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.titulo{
+    color: chocolate;
+    font-size: 10vh;
+
+    position: absolute;
+    top: 25%;
+    right: 0;
+
+    transform: translateY("-50");
+
+    z-index: 100;
+    margin: 2vh;
+
+    text-shadow: 5px 0px 0px 0px rgb(230, 202, 79);
+    transition: right 1s ease-in-out;
+}
+main{
+    height: 100vh;
+}

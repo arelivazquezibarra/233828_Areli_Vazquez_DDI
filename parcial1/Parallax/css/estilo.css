@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    overflow: hidden;
+}
+body{
+    width: 100vw;
+    height: 200vh;
+    perspective: 2px;
+    transform-style: preserve-3d;
+    background-color: rgb(143, 137, 54);
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.contenedor-1, .espacio{
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    transform: "preserve-3d";
+    /*background-image: url("../recursos/pexels-photo-268533.webp");
+    /*background-position: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;*/
+}
+.contenedor-1::before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: url("../recursos/paisaje-montana-degradado_23-2149152831.avif");
+    background-size: cover;
+    transform: translateZ(-1px) scale(2.2);
+}
+.pooh{
+    width: 30%;
+    left: 50%;
+    position: absolute;
+}
+.contenedor-1::after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: url("../recursos/ai-generated-green-grass-on-a-transparent-background-free-png.png");
+    background-size: cover;
+    transform: translateZ(10%);
+}
+/*.contenedor-1 .pooh{
+    transform: translateZ(-5px) scale(1.5.1.6) translate(-33%,10%);
+}*/
+.espacio{
+    height: 200vh;
+    background-color: rgb(143, 137, 54);
+}
