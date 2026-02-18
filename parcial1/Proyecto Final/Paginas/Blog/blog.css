@@ -20,3 +20,36 @@ li{
     font-size: 4vh;
     color: black;
 }
+.contenedor{
+    height: 100vh;
+    width: 100vw;
+    border: 2px solid black;
+    display: grid;
+    gap: 10px;
+    grid-template-areas: 
+    "uno dos tres";
+}
+.contenedor div{
+    border: 2px solid black;
+    font-size: 25px;
+}
+.contenedor1{
+    grid-area: uno;
+    background: yellow;
+}
+.contenedor2{
+    grid-area: dos;
+    background: pink;
+}
+.contenedor3{
+    grid-area: tres;
+    background: orange;
+}
+@media (max-width: 400px){
+    .contenedor{
+        grid-template-areas:
+        "uno"
+        "dos"
+        "tres";
+    }
+}

@@ -37,27 +37,62 @@ li{
 .elemento-1{
     grid-area: uno;
     background: yellow;
+    height: 16vh;
+    width: 20vw;
+}
+.elemento-1 img {
+    height: 50vh;
+    width: 20vw;
 }
 .elemento-2{
     grid-area: dos;
     background: pink;
-
+    height: 16vh;
+    width: 20vw;
+}
+.elemento-2 img{
+    height: 50vh;
+    width: 15vw;
 }
 .elemento-3{
     grid-area: tres;
     background: red;
+    height: 16vh;
+    width: 20vw;
+}
+.elemento-3 img{
+    height: 50vh;
+    width: 15vw;
 }
 .elemento-4{
     grid-area: cuatro;
     background: blue;
+    height: 16vh;
+    width: 20vw;
+}
+.elemento-4 img{
+    height: 50vh;
+    width: 15vw;
 }
 .elemento-5{
     grid-area: cinco;
     background: orange;
+    height: 16vh;
+    width: 20vw;
+}
+.elemento-5 img{
+    height: 50vh;
+    width: 15vw;
 }
 .elemento-6{
     grid-area: seis;
     background: green;
+    height: 16vh;
+    width: 20vw;
+}
+.elemento-6 img{
+    height: 50vh;
+    width: 15vw;
 }
 @media (max-width: 400px){
     .contenedor-grid{
