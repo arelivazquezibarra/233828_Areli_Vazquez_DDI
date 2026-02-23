@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practica Formulario</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+    <form id="form1">
+        <h1>Iniciar Sesion</h1>
+        <label for="correo">Correo</label>
+        <input type="email" name="correo" placeholder="Correo">
+        <br>
+        <label for="contraseña">Contraseña</label>
+        <input type="password" name="contraseña" placeholder="Contraseña">
+        <br>
+        <button type="button" onclick="leeDatos()">Entrar</button>
+    </form>
+    <form id="form">
+        <h1>Registro</h1>
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" placeholder="Nombre">
+        <br>
+        <label for="apellido">Apellido</label>
+        <input type="text" name="apellido" placeholder="Apellido">
+        <br>
+        <label for="correo">Correo</label>
+        <input type="email" name="correo" placeholder="Correo">
+        <br>
+        <label for="contraseña">Contraseña</label>
+        <input type="password" name="contraseña" placeholder="Contraseña">
+        <br>
+        <button type="button" onclick="leerDatos()">Guardar</button>
+    </form>
+</body>
+<script src="js/script.js"></script>
+</html>
