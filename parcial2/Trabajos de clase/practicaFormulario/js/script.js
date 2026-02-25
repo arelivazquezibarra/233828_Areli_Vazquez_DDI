@@ -1,5 +1,5 @@
 const formulario = document.querySelector("#form");
-const Form = document.querySelector("#form1")
+const Form = document.querySelector("#form1") 
 
 class UsuarioRegistro {
     constructor(correo, contra) {
@@ -12,12 +12,20 @@ class UsuarioRegistro {
     }
 }
 function leeDatos(){
-    const datosFormulario = new FormData(formulario);
+    const datosFormulario = new FormData(Form); // <-- usar Form (form1)
 
     const datos = Object.fromEntries(datosFormulario.entries());
 
-    let usuario = new UsuarioRegistro( datos.correo, datos.contraseña);
+    // Validar campos vacíos
+    if(!datos.correo || !datos.contraseña){
+        alert("Por favor completa todos los campos");
+        return;
+    }
+
+    let usuario = new UsuarioRegistro(datos.correo, datos.contraseña);
     console.log(usuario);
+
+    alert("Sesión iniciada correctamente");
 }
 class Usuario {
     constructor(nom, ape, correo, contra) {
@@ -36,6 +44,14 @@ function leerDatos(){
 
     const datos = Object.fromEntries(datosFormulario.entries());
 
+    // Validar campos vacíos
+    if(!datos.nombre || !datos.apellido || !datos.correo || !datos.contraseña){
+        alert("Por favor completa todos los campos");
+        return;
+    }
+
     let usuarioNuevo = new Usuario(datos.nombre, datos.apellido, datos.correo, datos.contraseña);
     console.log(usuarioNuevo);
+
+    alert("Sesión iniciada correctamente");
 }

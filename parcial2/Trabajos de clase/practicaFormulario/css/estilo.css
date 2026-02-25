@@ -2,3 +2,8 @@
     margin: 0;
     padding: 0
 }
+.contenedor1{
+    background: blue;
+    width: 35%;
+    border: solid black 3px;
+}
