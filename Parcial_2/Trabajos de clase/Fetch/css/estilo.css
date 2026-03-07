@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.card{
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+}
+.contenedor{
+    display: flex;
+    flex-wrap: wrap;
+}

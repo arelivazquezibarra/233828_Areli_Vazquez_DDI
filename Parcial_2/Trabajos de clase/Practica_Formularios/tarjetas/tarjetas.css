@@ -1,0 +1,19 @@
+#contenedor{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+}
+
+.card{
+width:200px;
+padding:15px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+text-align:center;
+background:white;
+}
+
+.card img{
+width:120px;
+}
