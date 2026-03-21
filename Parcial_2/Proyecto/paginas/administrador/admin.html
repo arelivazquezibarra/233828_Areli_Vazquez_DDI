@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador</title>
+    <link rel="stylesheet" href="../administrador/admin.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <h2>Panel Admin</h2>
+        <div>
+            <button onclick="mostrarInicio()">Inicio</button>
+            <button onclick="mostrarSubida()">Subir Archivo</button>
+            <button onclick="editarPerfil()">Editar</button>
+            <button onclick="cerrarSesion()">Salir</button>
+        </div>
+    </div>
+
+    <!-- PERFIL -->
+    <div id="perfil" class="perfil">
+        <img id="imgPerfil">
+        <h2 id="nombreUsuario"></h2>
+
+        <label for="nuevaFoto" class="btn-foto">Cambiar foto</label>
+        <input type="file" id="nuevaFoto" hidden>
+
+        <button onclick="cambiarFoto()">Guardar cambios</button>
+    </div>
+
+    <!-- VISTA INICIO -->
+    <div id="vistaInicio">
+        <div id="contenido" class="contenedor"></div>
+    </div>
+
+    <!-- VISTA SUBIDA -->
+    <div id="vistaSubida" style="display:none;">
+        <input type="file" id="archivo">
+        <button onclick="subirJSON()">Subir</button>
+    </div>
+</div>
+</body>
+<script src="../administrador/admin.js"></script>
+</html> 

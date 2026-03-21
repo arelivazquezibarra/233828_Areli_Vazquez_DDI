@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitante</title>
+    <link rel="stylesheet" href="../visitante/visitante.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <h2>Visitante</h2>
+        <div>
+            <button onclick="editarPerfil()">Editar</button>
+            <button onclick="cerrarSesion()">Salir</button>
+        </div>
+    </div>
+    <!-- PERFIL -->
+    <div id="perfil" class="perfil">
+        <img id="imgPerfil" src="" alt="Foto de perfil">
+        <h2 id="nombreUsuario"></h2>
+    
+        <label for="nuevaFoto" class="btn-foto">
+            Cambiar foto
+        </label>
+        <input type="file" id="nuevaFoto" hidden>
+        <button onclick="cambiarFoto()">Guardar cambios</button>
+    </div> 
+    <!-- CONTENIDO -->
+    <div id="contenido" class="contenedor"></div>
+</body>
+<script src="../visitante/vistante.js"></script>
+</html> 

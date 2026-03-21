@@ -1,0 +1,62 @@
+[
+    {
+        "nombre": "Hinata Shoyo",
+        "equipo":"Karasuno",
+        "descripcion": "conocido como «el pequeño gigante», es un estudiante de primer año de preparatoria con un sueño: convertirse en el mejor jugador de voleibol del mundo. A pesar de su baja estatura, ¡su espíritu combativo y su habilidad para saltar como un conejo son verdaderamente impresionantes!",
+        "foto":"../../Recursos/Hinata.jpg"
+    },
+    {
+        "nombre": "Kageyama Tobio",
+        "equipo":"Karasuno",
+        "descripcion": " es un jugador profesional de la V-League y exalumno de la Preparatoria Karasuno. A su vez, actualmente es miembro del Schweiden Adlers en el que juega habitualmente como Armador. El es el Co-protagonista del manga y anime de Haikyū!!.",
+        "foto":"../../Recursos/Kageyama.jpg"
+    },
+    {
+        "nombre": "Kenma Kozume",
+        "equipo":"Nekoma",
+        "descripcion": "Es un estudiante de la Preparatoria Nekoma y de 2do año. Aquí unos datos sobre él: -Ocupa la posición de armador y es el cerebro del equipo. -Cumple años el 16 de Octubre. -Tiene 16 años y mide 169,2 cm -Hace su primer debut el episodio 11 del anime.",
+        "foto":"../../Recursos/Kenma.jpg"
+    },
+    {
+        "nombre": "Kuroo Tetsuro",
+        "equipo":"Nekoma",
+        "descripcion": "Es un bloqueador medio conocido por su mente estratégica, naturaleza traviesa y habilidades de liderazgo. Kuroo es un personaje que ha influido en la cultura del voleibol de Nekoma desde su infancia, especialmente en su amigo Kenma Kozume. Su personalidad compleja y su habilidad para motivar y unir a su equipo lo convierten en un personaje querido y fascinante de la serie.",
+        "foto":"../../Recursos/Kuroo.jpg"
+    },
+    {
+        "nombre": "Akaashi Keiji",
+        "equipo":"Fokurodani",
+        "descripcion": " es el vicecapitán y colocador del equipo de voleibol de la Academia Fukurodani, conocido por su personalidad calmada, estratégica y su estrecha relación con Bokuto Koutaro.",
+        "foto":"../../Recursos/Akaashi.jpg"
+    },
+    {
+        "nombre": "Bokuto Kotaro",
+        "equipo":"Fokurodani",
+        "descripcion": "es un talentoso y carismático jugador de voleibol, conocido como El Rey Búho, cuya energía y habilidades destacan tanto dentro como fuera de la cancha.",
+        "foto":"../../Recursos/Bokuto.jpg"
+    },
+    {
+        "nombre": "Oikawa Tooru",
+        "equipo":"Aoba Josai",
+        "descripcion": "es un estudiante de 3er año de la Preparatoria Aoba Jōsai. Él es el capitán del equipo de voleibol y es ampliamente considerado como el mejor jugador del equipo, a pesar de no ser la estrella.",
+        "foto":"../../Recursos/Oikawa.jpg"
+    },
+    {
+        "nombre": "Iwaizumi Hajime",
+        "equipo":"Aoba Josai",
+        "descripcion": "es un estudiante de tercer año en la Preparatoria Aoba Johsai, conocido por ser wing spiker, vice-capitán y uno de los jugadores más destacados del equipo de voleibol, además de ser amigo cercano de Tōru Oikawa.",
+        "foto":"../../Recursos/Iwaizumi.jpg"
+    },
+    {
+        "nombre": "Atsumu Miya",
+        "equipo":"Inarizaki",
+        "descripcion": " es el armador titular de segundo año de Inarizaki High, reconocido por su precisión excepcional en los pases, su potente saque flotante y su competitividad dentro del voleibol escolar japonés.",
+        "foto":"../../Recursos/Atsumu.jpg"
+    },
+    {
+        "nombre": "Kiyoomi Sakusa",
+        "equipo":"Itachiyama",
+        "descripcion": "es un talentoso jugador de voleibol y ace de Itachiyama, conocido por su habilidad técnica excepcional, su personalidad calmada y meticulosa, y su naturaleza precavida y realista.",
+        "foto":"../../Recursos/Kiyoomi.jpg"
+    }
+]
