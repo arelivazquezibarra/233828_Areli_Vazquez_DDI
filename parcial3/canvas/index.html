@@ -9,10 +9,44 @@
 <body>
     <canvas id="lienzo" class="lienzo" 
         width="1000" 
-        height="800"
-        onmousedown="alPresionarClick(event)"
-        onmousemove="mientrasPrecionaClick(event)"
-        onmouseup="alSoltarClick(event)"></canvas>
+        height="800">
+    </canvas>
+    <div>
+        <!-- HERRAMIENTAS -->
+        <button id="btn_pincel">Pincel</button>
+        <button id="btn_linea">Linea</button>
+        <button id="btn_cuadro">Cuadro</button>
+        <button id="btn_circulo">Circulo</button>
+        <button id="btn_triangulo">Triangulo</button>
+        <button id="btn_sticker">Sticker</button>
+        <button id="btn_borrador">Borrador</button>
+
+        <!-- FILE -->
+        <div>
+            <input type="file" id="input_file">
+        </div>
+
+        <!-- CONTROLES -->
+        <input type="color" id="color_linea">
+        <input type="color" id="color_relleno">
+        <input type="range" id="grosor" min="1" max="20" value="5">
+
+        <input type="radio" name="modo" id="modo_relleno" checked> Relleno
+        <input type="radio" name="modo" id="modo_borde"> Borde
+
+        <!-- FILTROS -->
+        <button id="f_bn">Blanco y negro</button>
+        <button id="f_rojo">Escala rojos</button>
+        <button id="f_verde">Escala verdes</button>
+        <button id="f_azul">Escala azul</button>
+        <button id="f_sepia">Sepia</button>
+
+        <!-- ACCIONES -->
+        <button id="btn_limpiar">Limpiar</button>
+        <button id="btn_guardar">Guardar</button>
+        <button id="btn_deshacer">Deshacer</button>
+        <button id="btn_rehacer">Rehacer</button>
+    </div>
 </body>
-<script src="js/srcipt.js"></script>
+<script type="module" src="js/canvas.js"></script>
 </html>
