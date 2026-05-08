@@ -1,15 +1,16 @@
-import { Cuadrado, Linea, Sticker, Circulo, Triangulo } from "./figuras.js";
+import { Cuadrado, Linea, Sticker, Circulo, Estrella } from "./figuras.js";
 
 const canvas = document.querySelector("#lienzo");
 const ctx = canvas.getContext("2d");
 const elementos = [];
 let rehacer = [];
+let historialCanvas = [];
 const opciones = {
     pincel: true,
     linea: false,
     circulo: false,
     cuadro: false,
-    triangulo: false,
+    estrella: false,
     borrador: false,
     sticker: false,
 }
@@ -20,27 +21,89 @@ const posicionesCursor = {
 }
 let colorLinea = "blue";
 let colorRelleno = "red";
+let usarRelleno = true;
+let usarBorde = true;
 let grosor = 5;
 let imagenSticker = "../recursos/bokuto.jpg";
+let filtroActivo = "normal";
 
 let presionado = false;
 
 canvas.addEventListener("mousedown", (event) => alPresionarClick(event));
-canvas.addEventListener("mousemove", (event) => mientrasPrecionaClick(event));
+canvas.addEventListener("mousemove", (event) => mientrasPresionaClick(event));
 canvas.addEventListener("mouseup", (event) => alSoltarClick(event));
 
 document.querySelector("#btn_pincel").addEventListener("click", () => cambiarOpcion("pincel"))
 document.querySelector("#btn_linea").addEventListener("click", () => cambiarOpcion("linea"))
 document.querySelector("#btn_cuadro").addEventListener("click", () => cambiarOpcion("cuadro"))
 document.querySelector("#btn_circulo").addEventListener("click", () => cambiarOpcion("circulo"))
-document.querySelector("#btn_triangulo").addEventListener("click", () => cambiarOpcion("triangulo"))
+document.querySelector("#btn_estrella").addEventListener("click", () => cambiarOpcion("estrella"))
 document.querySelector("#btn_sticker").addEventListener("click", () => cambiarOpcion("sticker"))
 document.querySelector("#btn_borrador").addEventListener("click", () => cambiarOpcion("borrador"))
-f_bn.onclick = () => aplicarFiltro("bn");
-f_rojo.onclick = () => aplicarFiltro("rojo");
-f_verde.onclick = () => aplicarFiltro("verde");
-f_azul.onclick = () => aplicarFiltro("azul");
-f_sepia.onclick = () => aplicarFiltro("sepia");
+
+document.querySelector("#modo_relleno").onchange = (e) => {
+    usarRelleno = e.target.checked;
+};
+
+document.querySelector("#modo_borde").onchange = (e) => {
+    usarBorde = e.target.checked;
+};
+
+document.querySelector("#input_file").addEventListener("change", (event) => {
+    const archivo = event.target.files[0];
+    if(!archivo) return;
+    imagenSticker = URL.createObjectURL(archivo);
+})
+
+document.querySelector("#color_linea").addEventListener("input", (event) => {
+
+    colorLinea = event.target.value;
+
+});
+document.querySelector("#color_relleno").addEventListener("input", (event) => {
+
+    colorRelleno = event.target.value;
+
+});
+document.querySelector("#grosor").addEventListener("input", (event) => {
+
+    grosor = event.target.value;
+
+});
+
+document.querySelector("#f_bn").onclick = () => {
+    filtroActivo = "bn";
+    RenderizarElementos();
+};
+
+document.querySelector("#f_rojo").onclick = () => {
+    filtroActivo = "rojo";
+    RenderizarElementos();
+};
+
+document.querySelector("#f_verde").onclick = () => {
+    filtroActivo = "verde";
+    RenderizarElementos();
+};
+
+document.querySelector("#f_azul").onclick = () => {
+    filtroActivo = "azul";
+    RenderizarElementos();
+};
+
+document.querySelector("#f_sepia").onclick = () => {
+    filtroActivo = "sepia";
+    RenderizarElementos();
+};
+document.querySelector("#f_negativo").onclick = () => {
+    filtroActivo = "negativo";
+    RenderizarElementos();
+};
+
+document.querySelector("#f_positivo").onclick = () => {
+    filtroActivo = "positivo";
+    RenderizarElementos();
+};
 
 document.querySelector("#btn_limpiar").onclick = () => {
     elementos.length = 0;
@@ -77,27 +140,42 @@ function cambiarOpcion(opcion) {
 }
 
 function obtenerElemento(){
+
+    const copia = {
+        iniciales: {
+            x: posicionesCursor.iniciales.x,
+            y: posicionesCursor.iniciales.y
+        },
+        finales: {
+            x: posicionesCursor.finales.x,
+            y: posicionesCursor.finales.y
+        }
+    };
+
     if (opciones.pincel) {
-        return new Linea(posicionesCursor, colorLinea, grosor);
+        return new Linea(copia, colorLinea, grosor);
     }
+
     else if (opciones.linea) {
-        return new Linea(posicionesCursor, colorLinea, grosor);
+        return new Linea(copia, colorLinea, grosor);
     }
+
     else if (opciones.cuadro) {
-        return new Cuadrado(posicionesCursor, colorLinea, colorRelleno, grosor);
+        return new Cuadrado(copia, colorLinea, colorRelleno, grosor, usarRelleno, usarBorde);
     }
+
     else if (opciones.circulo) {
-        return new Circulo(posicionesCursor, colorLinea, colorRelleno, grosor);
+        return new Circulo(copia, colorLinea, colorRelleno, grosor, usarRelleno, usarBorde);
     }
+
+    else if (opciones.estrella) {
+        return new Estrella(copia, colorLinea, colorRelleno, grosor, usarRelleno, usarBorde);
+    }
+
     else if (opciones.sticker) {
-        return new Sticker(posicionesCursor, imagenSticker);
+        return new Sticker(copia, imagenSticker);
     }
-    else if (opciones.borrador) {
-        return new Linea(posicionesCursor, "#ffffff", grosor * 2);
-    }
-    else if (opciones.triangulo) {
-        return new Triangulo(posicionesCursor, colorLinea, colorRelleno, grosor);
-}
+
     return null;
 }
 /*
@@ -137,7 +215,7 @@ function alPresionarClick(event) {
     presionado = true;
 }
 
-function mientrasPrecionaClick(event) {
+function mientrasPresionaClick(event) {
     console.log("Mientras el cursor esta sobre el lienzo");
 
     if (!presionado) return;
@@ -145,16 +223,41 @@ function mientrasPrecionaClick(event) {
     posicionesCursor.finales.x = event.offsetX;
     posicionesCursor.finales.y = event.offsetY;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height); //Esto limpia el canvas 
+    //BORRADOR
+    if(opciones.borrador){
 
-    RenderizarElementos(); //Esto dibuja lo que se habia guardado 
+        ctx.save();
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.beginPath();
+        ctx.lineWidth = grosor * 2;
+        ctx.lineCap = "round";
+        ctx.moveTo(
+            posicionesCursor.iniciales.x,
+            posicionesCursor.iniciales.y
+        );
+        ctx.lineTo(
+            posicionesCursor.finales.x,
+            posicionesCursor.finales.y
+        );
+        ctx.stroke();
+        ctx.restore();
+
+        posicionesCursor.iniciales.x = posicionesCursor.finales.x;
+        posicionesCursor.iniciales.y = posicionesCursor.finales.y;
+
+        return;
+    }
+    if(!opciones.borrador){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        RenderizarElementos();
+    }
 
     if(opciones.pincel){ //Esto hace que el pincel tenga un dibujo continuo
         const copia = {
             iniciales: {...posicionesCursor.iniciales},
             finales: {...posicionesCursor.finales}
         };
-        const linea = new Linea(posicionesCursor, colorLinea, grosor);
+        const linea = new Linea(copia, colorLinea, grosor);
         elementos.push(linea);
 
         //Inidica el punto inicial para dibujar
@@ -165,17 +268,7 @@ function mientrasPrecionaClick(event) {
         return;
     }
 
-    //BORRADOR
-    if(opciones.borrador){
-        const linea = new Linea(posicionesCursor, "#ffffff", grosor * 2); //Esto no borra como tal, mas bien pinta una linea blanca encima de todo
-        elementos.push(linea);
-
-        posicionesCursor.iniciales.x = posicionesCursor.finales.x;
-        posicionesCursor.iniciales.y = posicionesCursor.finales.y;
-
-        RenderizarElementos();
-        return;
-    }
+    
 
     //Para tener las figuras que habias hecho 
     const elemento = obtenerElemento();
@@ -195,58 +288,85 @@ function alSoltarClick(event) {
     posicionesCursor.finales.x = event.offsetX;
     posicionesCursor.finales.y = event.offsetY;
 
-    //filtros color rojo
 
-    const imgData = ctx.getImageData(0, 0, canvas.clientWidth, canvas.clientHeight);
-    const data = imgData.data;
-    for (let i = 0; i < data.length; i += 4) {
-        let rojo = data[i] // rojo
-        let verde = data[i + 1] //verde
-        let azul = data[i + 2] //azul
-        let alfa = data[i + 3] //transparencia
 
-        data[i] = rojo + 50;
-        data[i + 1] = verde * .8;
-        data[i + 2] = azul * .8;
-        data[i + 3] = alfa;
-    }
+    if(!opciones.borrador){
 
-    ctx.putImageData(imgData, 0, 0)
+        const elemento = obtenerElemento();
 
-    const elemento = obtenerElemento();
-    if(elemento){
-        elementos.push(elemento);
-        rehacer = [];
+        if(elemento){
+            elementos.push(elemento);
+        }
     }
 
     console.log(elementos);
 
-    RenderizarElementos();
+    guardarEstadoCanvas();
     presionado = false;
 }
 
 function aplicarFiltro(tipo) {
+
+    if(tipo === "normal") return;
+
     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
     const data = imgData.data;
 
     for (let i = 0; i < data.length; i += 4) {
+
         let r = data[i];
         let g = data[i + 1];
         let b = data[i + 2];
 
+        // blanco y negro
         if (tipo === "bn") {
             let gris = (r + g + b) / 3;
-            data[i] = data[i+1] = data[i+2] = gris;
+            data[i] = gris;
+            data[i + 1] = gris;
+            data[i + 2] = gris;
         }
 
-        if (tipo === "rojo") data[i+1] = data[i+2] = 0;
-        if (tipo === "verde") data[i] = data[i+2] = 0;
-        if (tipo === "azul") data[i] = data[i+1] = 0;
+        // rojo
+        if (tipo === "rojo") {
+            data[i] = Math.min(255, data[i] * 1.3);
+            data[i + 1] *= 0.3;
+            data[i + 2] *= 0.3;
+        }
 
+        // verde
+        if (tipo === "verde") {
+            data[i] = Math.min(255, data[i] * 1.3);      // rojo
+            data[i + 1] *= 1.3;  // verde
+            data[i + 2] *= 0.3;  // azul
+        }
+
+        // azul
+        if (tipo === "azul") {
+            data[i] = Math.min(255, data[i] * 1.3);
+            data[i + 1] *= 0.3;
+            data[i + 2] *= 1.3;
+        }
+
+        // negativo
+        if (tipo === "negativo") {
+            data[i] = 255 - r;
+            data[i + 1] = 255 - g;
+            data[i + 2] = 255 - b;
+        }
+
+        //positivo
+        if(tipo === "positivo"){
+            data[i] = Math.min(255, r + 50);
+            data[i + 1] = Math.min(255, g + 50);
+            data[i + 2] = Math.min(255, b + 50);
+        }
+
+        // sepia
         if (tipo === "sepia") {
-            data[i] = 0.393*r + 0.769*g + 0.189*b;
-            data[i+1] = 0.349*r + 0.686*g + 0.168*b;
-            data[i+2] = 0.272*r + 0.534*g + 0.131*b;
+            data[i] = 0.393 * r + 0.769 * g + 0.189 * b;
+            data[i + 1] = 0.349 * r + 0.686 * g + 0.168 * b;
+            data[i + 2] = 0.272 * r + 0.534 * g + 0.131 * b;
         }
     }
 
@@ -254,15 +374,24 @@ function aplicarFiltro(tipo) {
 }
 
 function RenderizarElementos() {
-    console.log("renderizando", elementos);
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (let i = 0; i < elementos.length; i++) {
+
         elementos[i].Dibujar(ctx);
+
     }
+
+    aplicarFiltro(filtroActivo);
 }
 
 function Limpiar() {
-    elementos = [];
+    elementos.length = 0;
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+}
+function guardarEstadoCanvas() {
+    historialCanvas.push(
+        ctx.getImageData(0, 0, canvas.width, canvas.height)
+    );
 }

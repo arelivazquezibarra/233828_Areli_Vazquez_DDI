@@ -12,62 +12,123 @@ class Figura {
 }
 
 export class Cuadrado extends Figura {
-    constructor(posicionesCursor = {},
+
+    constructor(
+        posicionesCursor = {},
         color_linea = "black",
         color_relleno = "black",
-        grozor_linea = 5) {
+        grozor_linea = 5,
+        usarRelleno = true,
+        usarBorde = true
+    ) {
 
-        super(posicionesCursor, color_linea, color_relleno, grozor_linea);
+        super(
+            posicionesCursor,
+            color_linea,
+            color_relleno,
+            grozor_linea
+        );
 
-        this.x = Math.min(this.posicionesCursor.iniciales.x, this.posicionesCursor.finales.x)
-        this.y = Math.min(this.posicionesCursor.iniciales.y, this.posicionesCursor.finales.y);
+        this.usarRelleno = usarRelleno;
+        this.usarBorde = usarBorde;
 
-        this.alto = Math.abs(this.posicionesCursor.finales.y - this.posicionesCursor.iniciales.y)
-        this.ancho = Math.abs(this.posicionesCursor.finales.x - this.posicionesCursor.iniciales.x);
+        this.x = Math.min(
+            this.posicionesCursor.iniciales.x,
+            this.posicionesCursor.finales.x
+        );
 
+        this.y = Math.min(
+            this.posicionesCursor.iniciales.y,
+            this.posicionesCursor.finales.y
+        );
+
+        this.alto = Math.abs(
+            this.posicionesCursor.finales.y -
+            this.posicionesCursor.iniciales.y
+        );
+
+        this.ancho = Math.abs(
+            this.posicionesCursor.finales.x -
+            this.posicionesCursor.iniciales.x
+        );
     }
-    Dibujar(ctx) {
-        ctx.beginPath();
-        ctx.fillStyle = this.color_relleno
-        ctx.strokeStyle = this.color_linea
-        ctx.lineWidth = this.grozor_linea
 
-        ctx.fillRect(this.x, this.y, this.ancho, this.alto);
-        ctx.strokeRect(this.x, this.y, this.ancho, this.alto);
+    Dibujar(ctx) {
+
+        ctx.beginPath();
+
+        ctx.fillStyle = this.color_relleno;
+        ctx.strokeStyle = this.color_linea;
+        ctx.lineWidth = this.grozor_linea;
+
+        if(this.usarRelleno){
+            ctx.fillRect(this.x, this.y, this.ancho, this.alto);
+        }
+
+        if(this.usarBorde){
+            ctx.strokeRect(this.x, this.y, this.ancho, this.alto);
+        }
     }
 }
 
 export class Circulo extends Figura {
+
     constructor(
         posicionesCursor = {},
         color_linea = "black",
         color_relleno = "transparent",
-        grozor_linea = 5
+        grozor_linea = 5,
+        usarRelleno = true,
+        usarBorde = true
     ) {
-        super(posicionesCursor, color_linea, color_relleno, grozor_linea);
 
-        // Centro del círculo
+        super(
+            posicionesCursor,
+            color_linea,
+            color_relleno,
+            grozor_linea
+        );
+
+        this.usarRelleno = usarRelleno;
+        this.usarBorde = usarBorde;
+
         this.x = this.posicionesCursor.iniciales.x;
         this.y = this.posicionesCursor.iniciales.y;
 
-        // Calcular radio usando distancia entre puntos
-        const dx = this.posicionesCursor.finales.x - this.posicionesCursor.iniciales.x;
-        const dy = this.posicionesCursor.finales.y - this.posicionesCursor.iniciales.y;
+        const dx =
+            this.posicionesCursor.finales.x -
+            this.posicionesCursor.iniciales.x;
+
+        const dy =
+            this.posicionesCursor.finales.y -
+            this.posicionesCursor.iniciales.y;
 
         this.radio = Math.sqrt(dx * dx + dy * dy);
     }
 
     Dibujar(ctx) {
+
         ctx.beginPath();
 
         ctx.strokeStyle = this.color_linea;
         ctx.fillStyle = this.color_relleno;
         ctx.lineWidth = this.grozor_linea;
 
-        ctx.arc(this.x, this.y, this.radio, 0, Math.PI * 2);
+        ctx.arc(
+            this.x,
+            this.y,
+            this.radio,
+            0,
+            Math.PI * 2
+        );
 
-        ctx.fill();
-        ctx.stroke();
+        if(this.usarRelleno){
+            ctx.fill();
+        }
+
+        if(this.usarBorde){
+            ctx.stroke();
+        }
     }
 }
 
@@ -93,43 +154,99 @@ export class Linea {
 }
 
 export class Sticker {
+
     constructor(posicionesCursor, urlImagen) {
-        this.posicionesCursor = posicionesCursor || {
-            iniciales: { x: 0, y: 0 },
-            finales: { x: 0, y: 0 }
-        },
+
+        this.posicionesCursor = posicionesCursor;
+
         this.imagen = new Image();
         this.imagen.src = urlImagen;
+
+        this.ancho = Math.abs(
+            posicionesCursor.finales.x -
+            posicionesCursor.iniciales.x
+        );
+
+        this.alto = Math.abs(
+            posicionesCursor.finales.y -
+            posicionesCursor.iniciales.y
+        );
     }
+
     Dibujar(ctx) {
-        ctx.beginPath()
-        ctx.drawImage(this.imagen, 0,0, this.imagen.width, this.imagen.height,
-            this.posicionesCursor.iniciales.x, this.posicionesCursor.iniciales.y, this.imagen.width/2, this.imagen.height/2 
-        )
+
+        ctx.drawImage(
+            this.imagen,
+            this.posicionesCursor.iniciales.x,
+            this.posicionesCursor.iniciales.y,
+            this.ancho,
+            this.alto
+        );
     }
 }
-export class Triangulo {
-    constructor(posicionesCursor, color_linea, color_relleno, grozor_linea) {
+export class Estrella {
+
+    constructor(
+        posicionesCursor,
+        color_linea,
+        color_relleno,
+        grozor_linea,
+        usarRelleno,
+        usarBorde
+    ){
+
         this.posicionesCursor = posicionesCursor;
         this.color_linea = color_linea;
         this.color_relleno = color_relleno;
         this.grozor_linea = grozor_linea;
+
+        this.usarRelleno = usarRelleno;
+        this.usarBorde = usarBorde;
     }
 
-    Dibujar(ctx) {
-        const { iniciales, finales } = this.posicionesCursor;
+    Dibujar(ctx){
+
+        const x = this.posicionesCursor.iniciales.x;
+        const y = this.posicionesCursor.iniciales.y;
+
+        const dx = this.posicionesCursor.finales.x - x;
+        const dy = this.posicionesCursor.finales.y - y;
+
+        const radio = Math.sqrt(dx * dx + dy * dy);
 
         ctx.beginPath();
+
         ctx.strokeStyle = this.color_linea;
         ctx.fillStyle = this.color_relleno;
         ctx.lineWidth = this.grozor_linea;
 
-        ctx.moveTo(iniciales.x, finales.y);
-        ctx.lineTo((iniciales.x + finales.x) / 2, iniciales.y);
-        ctx.lineTo(finales.x, finales.y);
+        const puntas = 5;
+
+        for(let i = 0; i < puntas * 2; i++){
+
+            const angulo = (Math.PI / puntas) * i;
+
+            const r = i % 2 === 0 ? radio : radio / 2;
+
+            const px = x + Math.cos(angulo - Math.PI / 2) * r;
+            const py = y + Math.sin(angulo - Math.PI / 2) * r;
+
+            if(i === 0){
+                ctx.moveTo(px, py);
+            }
+            else{
+                ctx.lineTo(px, py);
+            }
+        }
+
         ctx.closePath();
 
-        ctx.fill();
-        ctx.stroke();
+        if(this.usarRelleno){
+            ctx.fill();
+        }
+
+        if(this.usarBorde){
+            ctx.stroke();
+        }
     }
 }
